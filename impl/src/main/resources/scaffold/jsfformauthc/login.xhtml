@@ -16,9 +16,23 @@
         </h2>
         <p>Tip: you can login with a username/password of picketlink/picketlink. Please, change it before publishing your application.</p>
         <form method="POST" action="j_security_check">
-            <input type="text" name="j_username"/>
-            <input type="password" name="j_password"/>
-            <input type="submit" name="login" value="Login"/>
+            <table>
+                <tbody>
+                <tr>
+                    <td class="label"><label for="search:customerBeanExampleFirstName">User Name:</label></td>
+                    <td class="component"><input type="text" name="j_username"/></td>
+                    <td class="required"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="search:customerBeanExampleFirstName">Password:</label></td>
+                    <td class="component"><input type="password" name="j_password"/></td>
+                    <td class="required"></td>
+                </tr>
+                </tbody>
+            </table>
+            <span class="buttons">
+                <input type="submit" value="Sign In" />
+            </span>
         </form>
         <p style="text-align: right; padding-top: 150px">
             <a target="_blank" href="http://jboss.org"><img
