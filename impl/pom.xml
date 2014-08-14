@@ -11,7 +11,7 @@
   <dependencies>
     <dependency>
       <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-api</artifactId>
+      <artifactId>picketlink</artifactId>
     </dependency>
     <dependency>
       <groupId>org.picketlink</groupId>
