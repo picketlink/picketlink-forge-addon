@@ -10,6 +10,7 @@ import org.jboss.forge.arquillian.Dependencies;
 import org.jboss.forge.arquillian.archive.ForgeArchive;
 import org.jboss.forge.furnace.repositories.AddonDependencyEntry;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.picketlink.tools.forge.ConfigurationOperations.DEFAULT_TOP_LEVEL_PACKAGE;
 
 @RunWith(Arquillian.class)
+@Ignore
 public class PicketLinkSetupCommandTestCase extends AbstractPicketLinkSetupCommandTestCase {
 
     @Deployment
