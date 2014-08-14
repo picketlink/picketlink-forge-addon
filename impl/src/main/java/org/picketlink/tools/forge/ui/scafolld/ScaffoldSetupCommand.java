@@ -86,12 +86,14 @@ public class ScaffoldSetupCommand extends AbstractProjectCommand implements UIWi
 
     @Override
     public boolean isEnabled(UIContext context) {
-        Project selectedProject = getSelectedProject(context);
-        Configuration configuration = selectedProject.getFacet(ConfigurationFacet.class).getConfiguration();
+        if (super.isEnabled(context)) {
+            Project selectedProject = getSelectedProject(context);
+            Configuration configuration = selectedProject.getFacet(ConfigurationFacet.class).getConfiguration();
 
-        boolean isScaffoldProject = configuration.getBoolean(ConfigurationOperations.Properties.PICKETLINK_SCAFFOLD_PROJECT.name(), false);
+            return configuration.getBoolean(ConfigurationOperations.Properties.PICKETLINK_SCAFFOLD_PROJECT.name(), false);
+        }
 
-        return super.isEnabled(context) && !isScaffoldProject;
+        return false;
     }
 
     @Override
