@@ -18,7 +18,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <version.furnace>2.7.2.Final</version.furnace>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <version.picketlink>2.7.0-SNAPSHOT</version.picketlink>
+    <version.picketlink>2.6.0.Final</version.picketlink>
   </properties>
   <dependencyManagement>
     <dependencies>
