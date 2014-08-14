@@ -1,0 +1,277 @@
+== picketlink-forge-addon
+:idprefix: id_ 
+
+The picketlink-forge-addon enables security to your project by providing configuration options to quickly setup *Authentication*, 
+*Authorization* and *Identity Management* to your project.
+
+PicketLink is an umbrella project for Security and Identity Management for Java Applications and fully integrated with CDI:
+
+- JavaEE Security based on CDI
+- Http Security and Url Filtering
+- Identity Management
+- Support for Federation Protocols such as SAML, oAuth and OpenID.
+- Social Authentication
+- Token Management and Authentication
+- Authorization based on Security Annotations and EL Expressions
+- RESTFul and Mobile Security Features
+
+More details on http://picketlink.org[picketlink.org]. 
+        
+=== Depends on
+
+[options="header"]
+|===
+|Addon |Exported |Optional
+
+|ui
+|no
+|no
+
+|projects
+|yes
+|no
+
+|parser-java
+|yes
+|no
+
+|javaee
+|yes
+|no
+
+|configuration
+|yes
+|no
+
+|maven
+|yes
+|no
+
+|org.jboss.forge.furnace.container:cdi
+|no
+|no
+
+|===
+
+== Building Sources and Forge Installation
+
+If you want to use the latest changes for this addon, please clone the https://github.com/picketlink/picketlink-forge-addon/[PicketLink Forge Addon Repository] in GitHub.
+
+        git clone https://github.com/picketlink/picketlink-forge-addon/
+        
+Once you've successfully cloned the repository, navigate to the newly created directory:
+
+[source,cmd]
+        cd picketlink-forge-addon
+        
+Make sure Forge is properly installed and configured in your environment. If so, you should be able to start Forge by typing
+
+[source,cmd]
+        forge
+        
+IMPORTANT: For more details about how to install Forge, follow the instructions https://github.com/forge/core/blob/master/README.asciidoc[here].
+        
+Once you're in Forge Shell perform a build as follows:
+
+[source,cmd]
+        build --notest clean install
+        
+After that, enter the *addon* module 
+
+[source,cmd]
+        cd addon
+        
+And finally install the addon into your Forge installation
+
+[source,cmd]
+        addon-build-and-install
+        
+If everything was fine, you should be able to see the following command in Forge Shell
+
+        picketlink-setup
+
+== Features
+
+NOTE:When using this addon keep in mind that once your project is properly configured you are able to use whatever feature provide
+by the PicketLink project. The addon provides specific commands for some of the most common tasks when working with PicketLink.
+Please check http://picketlink.org[picketlink.org] for more information about its features.
+
+Configuration of Maven Dependencies::
+   This addon configures all the necessary http://docs.jboss.org/picketlink/2/latest/reference/html-single/#Maven_Dependencies[PicketLink Dependencies] to your project's pom.xml. All PicketLink-related dependencies are managed
+   by the PicketLink Bill Of Materials(BOM) as well their respective versions.
+
+Swtich between different PicketLink Versions::
+   This addon provides an easy way to choose a specific PicketLink version. This is useful if you want to test a specific version, including
+   snapshots. By default, the latest final released version is configured.
+
+Http Security and Url Filtering ::
+   This addon provides an easy way to enable security to your Http-based project. It provides useful commands to quickly setup
+authentication to your application using FORM, BASIC, DIGEST or X509. It also provides a default logout functionality.   
+   
+Identity Management using a Database or Filesystem Identity Stores ::
+   This addon provides an easy way to enable Identity Management to your project using a Database or Filesystem to store
+   your identity data such as users, roles, groups and so forth. You can choose to use the http://docs.jboss.org/picketlink/2/latest/reference/html-single/#sect-Basic_Identity_Model[PicketLink Basic Model]
+   or provide your own custom Identity Model to represent your users, roles, groups or any other type of identity.
+
+Default Users, Roles and Groups ::
+   When using the Basic Identity Model, this addon automatically creates a @Startup EJB to initialize your identity store with
+   some default users, roles and groups.
+
+Creation of JPA Entities based on your Identity Types ::
+   This addon provides useful commands to generate JPA entities based on your PicketLink Identity Types. This is specially useful
+   if you have enabled Identity Management to your project using a JPA Identity Store. And also if you want to write your
+   own Identity Model instead of using the Basic Identity Model provided by PicketLink.
+
+Project Templates ::
+   This addon provides useful templates to get you quickly started with PicketLink. They are a valuable source of knowledge
+   and can help you to build your own project.
+
+== Usage
+
+=== Applying Security to a Forge Scaffold Project
+
+First, create a new project as follows:
+
+[source,cmd]
+        project-new --named picketlink-forge-app --topLevelPackage org.picketlink.forge.app --type war
+
+Now, add a simple JPA Entity to your project as follows:
+
+[source,cmd]
+        jpa-new-entity --named Customer
+
+Let's add a single field to this entity:
+
+[source,cmd]
+        jpa-new-field --named firstName
+        
+Now we can use Forge commands to generate some CRUD pages to the entity above:
+
+[source,cmd]
+        scaffold-setup
+        
+And
+
+[source,cmd]
+        scaffold-generate
+        
+These last commands will add to your project some default pages provided by Forge, including a CRUD functionality to the
+*Customer* entity.
+
+Now, check if everything is fine by typing:
+
+[source,cmd]
+        build clean install
+
+By default, this project does not provide any authentication method or any way to manage users, roles and groups. So let's
+enable PicketLink:
+
+[source,cmd]
+        picketlink-setup
+        
+Once enabled, we can configure Identity Management to the project as follows:        
+        
+[source,cmd]
+        picketlink-setup --feature idm
+
+Now, to configure a Form-based authentication to the project just type:
+
+[source,cmd]
+        picketlink-setup --feature http
+        
+Now, check if everything is fine by typing:
+
+[source,cmd]
+        build clean install
+
+And deploy the application.
+
+=== Creating a Project From Scratch
+
+First, create a new project as follows:
+
+[source,cmd]
+        project-new --named picketlink-forge-app --topLevelPackage org.picketlink.forge.app --type war
+
+To configure your project with PicketLink just type:
+
+[source,cmd]
+        picketlink-setup
+        
+The command above will just configure your project with the latest version of PicketLink Maven Dependencies. You can also specify a
+particular version if you want to use other version than the default, including SNAPSHOTS:
+
+[source,cmd]
+        picketlink-setup --showSnapshots --version 2.7.0-SNAPSHOT
+        
+After executing this command for the first time, you are allowed to provide more configuration options such as:
+
+[source,cmd]
+        picketlink-setup
+        --showSnapshots  --version  --feature
+        
+The *feature* is a configuration option that allows you to configure a specific PicketLink module to your project. Here you can
+choose between *idm* or *http*. The first provides a set of configurations to enable Identity Management to your project. The 
+latter is about providing some Http security options such as authentication.
+
+For example, to configure Identity Management to your project, just type:
+
+[source,cmd]
+        picketlink-setup --feature idm
+        
+This command will configure your project with the default Identity Management configuration. Which uses a JPA Identity Store
+to store your users, roles, groups and so forth. By default, is created a @Startup EJB that initialize the database with some default
+users, roles and groups.
+
+Now, if you want to enable authentication to your project just type:
+
+[source,cmd]
+        picketlink-setup --feature http
+        
+This command will configure Form-based authentication to your project, which is the default authentication method. A login and error page is created for you.
+
+Build your project and deploy the WAR.
+
+=== Using Project Templates
+
+This addon provides some useful project templates from where you can create your own or try out a specific PicketLink feature.
+
+First, create a new project as follows:
+
+[source,cmd]
+        project-new --named picketlink-forge-app --topLevelPackage org.picketlink.forge.app --type war
+
+Execute the *picketlink-setup* command:
+
+[source,cmd]
+        picketlink-setup
+        
+Now you can execute the *picketlink-scaffold-setup* and choose any of the available templates:
+
+[source,cmd]
+        picketlink-scaffold-setup
+        
+        [0] - JSF Project with Form-based Authentication and Logout
+
+        Template (Select a template): [0-0]         
+
+=== Generating JPA Entities from your Custom Identity Types
+
+If you're not familiar with PicketLink Identity Model, please take a look http://docs.jboss.org/picketlink/2/latest/reference/html-single/#sect-Identity_Model[here].
+
+To generate a basic mapping based on your custom identity types just type:
+
+[source,cmd]
+         picketlink-setup --feature idm --generateEntitiesFromIdentityModel
+         
+This command will scan your project source directory for Identity Types and create their respective JPA entities.
+
+== Want to Contribute ?
+
+Help us to improve this addon by giving us feedback or suggestions about its features. If you think a specific configuration
+task or feature should be provided by this addon, please let us know.
+
+We want to improve this addon as much as possible and provide a better experience for those looking a quick way to create a secure
+infrastructure to their projects.
+
+You can open an issue at https://issues.jboss.org/browse/PLINK[PLINK].

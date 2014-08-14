@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/resources/scaffold/pageTemplate.xhtml">
+
+    <ui:param name="pageTitle" value="Welcome to Forge" />
+
+    <ui:define name="header">
+        Welcome to Forge
+    </ui:define>
+
+    <ui:define name="main">
+        <h2 class="success">
+            Please, provide your credentials below.
+        </h2>
+        <p>Tip: you can login with a username/password of picketlink/picketlink. Please, change it before publishing your application.</p>
+        <h3>This form is an example about how to use a bean to perform authentication.</h3>
+        <h:form id="loginForm">
+            <h:messages globalOnly="true"/>
+
+            <h:inputText id="name" value="#{loginCredentials.userId}"/>
+            <h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/>
+            <h:commandButton id="login" value="Login" action="#{loginController.login}" styleClass="loginButton"/>
+        </h:form>
+        <p>
+            Tip: you can login with a username/password of picketlink/picketlink. Please, change it before publishing your application.
+        </p>
+        <p style="text-align: right; padding-top: 150px">
+            <a target="_blank" href="http://jboss.org"><img
+                    src='#{resource["jboss-community.png"]}'
+                    alt="JBoss and JBoss Community" width="254" height="31" border="0" />
+            </a> <br /> To replace this page edit 'src/main/webapp/login.xhtml', or
+            keep Forging!
+        </p>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/scaffold/pageTemplate.xhtml">
+
+    <ui:param name="pageTitle" value="Invalid Credentials" />
+
+    <ui:define name="header">
+        Oops
+    </ui:define>
+
+    <ui:define name="subheader">
+        Your credentials are not valid. Please, try again.
+    </ui:define>
+
+    <ui:define name="main">
+        <p style="text-align: right; padding-top: 150px">
+            <a target="_blank" href="http://jboss.org"><img
+                    src='#{resource["jboss-community.png"]}'
+                    alt="JBoss and JBoss Community" width="254" height="31" border="0" />
+            </a> <br /> To replace this page edit 'src/main/webapp/loginFailed.xhtml', or
+            keep Forging!
+        </p>
+    </ui:define>
+
+</ui:composition>
