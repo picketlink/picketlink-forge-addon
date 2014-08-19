@@ -65,13 +65,11 @@ public class BasicAuthenticationSchemeWizardStep extends AbstractProjectCommand 
         config
             .append(".http()")
                 .append(".allPaths()")
-                    .append(".inbound()")
-                        .append(".authc()")
-                            .append(".basic()")
-                                .append(".realmName(\"").append(this.realmName.getValue()).append("\")")
+                    .append(".authc()")
+                        .append(".basic()")
+                            .append(".realmName(\"").append(this.realmName.getValue()).append("\")")
                 .append(".path(\"/logout\")")
-                    .append(".inbound()")
-                        .append(".logout()");
+                    .append(".logout()");
 
         this.configurationOperations.newConfiguration(selectedProject, config);
 
