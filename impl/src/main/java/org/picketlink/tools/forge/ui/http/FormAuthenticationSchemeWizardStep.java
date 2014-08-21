@@ -77,14 +77,14 @@ public class FormAuthenticationSchemeWizardStep extends AbstractProjectCommand i
 
         config
             .append(".http()")
-                .append(".pathGroup(\"JSF Protected Pages\")")
-                    .append(".authc()")
+                .append(".forGroup(\"JSF Protected Pages\")")
+                    .append(".authenticateWith()")
                         .append(".form()")
                             .append(".loginPage(\"/faces/login.xhtml\")")
                             .append(".errorPage(\"/faces/loginFailed.xhtml\")")
-                .append(".path(\"/*.xhtml\", \"JSF Protected Pages\")")
-                .append(".path(\"/*.jsf\", \"JSF Protected Pages\")")
-                .append(".path(\"/logout\")")
+                .append(".forPath(\"/*.xhtml\", \"JSF Protected Pages\")")
+                .append(".forPath(\"/*.jsf\", \"JSF Protected Pages\")")
+                .append(".forPath(\"/logout\")")
                     .append(".logout()");
 
         this.configurationOperations.newConfiguration(selectedProject, config);

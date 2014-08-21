@@ -65,7 +65,7 @@ public class DigestAuthenticationSchemeWizardStep extends AbstractProjectCommand
         config
             .append(".http()")
                 .append(".allPaths()")
-                    .append(".authc()")
+                    .append(".authenticateWith()")
                         .append(".digest()")
                             .append(".realmName(\"").append(this.realmName.getValue()).append("\")")
                 .append(".path(\"/logout\")")
