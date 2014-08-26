@@ -108,7 +108,7 @@ public class MavenDependencies {
             for (int i = availableVersions.size() - 1; i >= 0; i--) {
                 String version = availableVersions.get(i).getVersion();
 
-                if (version != null && version.toUpperCase().contains("2.7.0.Beta1")) {
+                if (version != null && version.toUpperCase().contains("2.7.0.BETA1")) {
                     latestVersion = availableVersions.get(i);
                     break;
                 }
