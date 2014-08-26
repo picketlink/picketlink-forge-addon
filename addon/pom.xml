@@ -9,7 +9,7 @@
   </parent>
   <artifactId>picketlink-forge-addon</artifactId>
   <properties>
-    <version.picketlink>2.6.0.Final</version.picketlink>
+    <version.picketlink>2.7.0.Beta1</version.picketlink>
   </properties>
   <dependencyManagement>
     <dependencies>
