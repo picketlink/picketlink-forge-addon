@@ -113,20 +113,24 @@ public class AttributedTypeOperations {
                             filePath = filePath.substring(1);
                         }
 
-                        filePath = filePath.substring(filePath.indexOf(basePackagePath));
+                        int basePackageIndex = filePath.indexOf(basePackagePath);
 
-                        String typeName = filePath.replace(File.separatorChar, '.');
+                        if (basePackageIndex != -1) {
+                            filePath = filePath.substring(basePackageIndex);
 
-                        Class<?> type = null;
+                            String typeName = filePath.replace(File.separatorChar, '.');
 
-                        try {
-                            type = classLoader.loadClass(typeName);
-                        } catch (ClassNotFoundException e) {
+                            Class<?> type = null;
 
-                        }
+                            try {
+                                type = classLoader.loadClass(typeName);
+                            } catch (ClassNotFoundException e) {
 
-                        if (isAttributedType(type, classLoader)) {
-                            entityTypes.add(type.getName());
+                            }
+
+                            if (isAttributedType(type, classLoader)) {
+                                entityTypes.add(type.getName());
+                            }
                         }
                     }
 
