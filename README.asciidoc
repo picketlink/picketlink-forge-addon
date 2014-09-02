@@ -202,9 +202,9 @@ The command above will just configure your project with the latest version of Pi
 particular version if you want to use other version than the default, including SNAPSHOTS:
 
 [source,cmd]
-        picketlink-setup --showSnapshots --version 2.7.0-SNAPSHOT
+        picketlink-setup --showSnapshots --version 2.7.0.Beta1
 
-NOTE:The addon must be used with PicketLink 2.7.0.Beta1 versions and beyond.
+NOTE:The addon must be used with PicketLink 2.7.0.Beta1 versions and beyond. Try to use the latest version when possible.
 
 After executing this command for the first time, you are allowed to provide more configuration options such as:
 
