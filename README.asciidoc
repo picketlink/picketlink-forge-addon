@@ -203,7 +203,9 @@ particular version if you want to use other version than the default, including 
 
 [source,cmd]
         picketlink-setup --showSnapshots --version 2.7.0-SNAPSHOT
-        
+
+NOTE:The addon must be used with PicketLink 2.7.0.Beta1 versions and beyond.
+
 After executing this command for the first time, you are allowed to provide more configuration options such as:
 
 [source,cmd]
