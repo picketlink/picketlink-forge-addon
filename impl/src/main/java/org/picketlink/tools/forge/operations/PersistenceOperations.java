@@ -196,10 +196,10 @@ public class PersistenceOperations {
 
     private String getPackageRootPath(MavenFacet mavenFacet) {
         if ("war".equalsIgnoreCase(mavenFacet.getModel().getPackaging())) {
-            return "/WEB-INF/classes/";
+            return File.separatorChar + "WEB-INF" + File.separatorChar + "classes" + File.separatorChar;
         }
 
-        return "/";
+        return File.separator;
     }
 
     public URLClassLoader getProjectClassLoader(Project selectedProject) {
@@ -214,7 +214,7 @@ public class PersistenceOperations {
             dependenciesURL.add(new URL(formatJarUrl(projectArtifact, getPackageRootPath(mavenFacet))));
 
             for (Dependency dependency : dependencyResolver.resolveDependencies(projectDependencyQuery)) {
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
             }
 
             PicketLinkBaseFacet picketLinkFacet = selectedProject.getFacet(PicketLinkBaseFacet.class);
@@ -226,13 +226,13 @@ public class PersistenceOperations {
 
             Dependency simpleSchemeDependency = this.dependencyResolver.resolveArtifact(query);
 
-            dependenciesURL.add(new URL(formatJarUrl(simpleSchemeDependency.getArtifact(), "/")));
+            dependenciesURL.add(new URL(formatJarUrl(simpleSchemeDependency.getArtifact(), File.separator)));
 
             Set<Dependency> basicModelDependencies = this.dependencyResolver.resolveDependencies(query);
 
             for (Dependency dependency : basicModelDependencies) {
                 dependency = this.dependencyResolver.resolveArtifact(create(dependency, "jar"));
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
             }
 
             DependencyFacet dependencyFacet = selectedProject.getFacet(DependencyFacet.class);
@@ -240,7 +240,7 @@ public class PersistenceOperations {
 
             for (Dependency dependency : effectiveDependencies) {
                 dependency = this.dependencyResolver.resolveArtifact(create(dependency, "jar"));
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
             }
 
             return new URLClassLoader(dependenciesURL.toArray(new URL[dependenciesURL.size()]));
