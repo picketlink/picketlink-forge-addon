@@ -196,10 +196,10 @@ public class PersistenceOperations {
 
     private String getPackageRootPath(MavenFacet mavenFacet) {
         if ("war".equalsIgnoreCase(mavenFacet.getModel().getPackaging())) {
-            return File.separatorChar + "WEB-INF" + File.separatorChar + "classes" + File.separatorChar;
+            return "/WEB-INF/classes/";
         }
 
-        return File.separator;
+        return "/";
     }
 
     public URLClassLoader getProjectClassLoader(Project selectedProject) {
