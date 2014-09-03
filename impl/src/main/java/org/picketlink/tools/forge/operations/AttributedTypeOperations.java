@@ -163,7 +163,7 @@ public class AttributedTypeOperations {
             dependenciesURL.add(new URL(formatJarUrl(projectArtifact, getPackageRootPath(mavenFacet))));
 
             for (Dependency dependency : dependencyResolver.resolveDependencies(projectDependencyQuery)) {
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
             }
 
             DependencyFacet dependencyFacet = selectedProject.getFacet(DependencyFacet.class);
@@ -172,7 +172,7 @@ public class AttributedTypeOperations {
 
             for (Dependency dependency : effectiveDependencies) {
                 dependency = this.dependencyResolver.resolveArtifact(create(dependency, "jar"));
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
             }
 
             return new URLClassLoader(dependenciesURL.toArray(new URL[dependenciesURL.size()]));

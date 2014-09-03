@@ -214,7 +214,7 @@ public class PersistenceOperations {
             dependenciesURL.add(new URL(formatJarUrl(projectArtifact, getPackageRootPath(mavenFacet))));
 
             for (Dependency dependency : dependencyResolver.resolveDependencies(projectDependencyQuery)) {
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
             }
 
             PicketLinkBaseFacet picketLinkFacet = selectedProject.getFacet(PicketLinkBaseFacet.class);
@@ -226,13 +226,13 @@ public class PersistenceOperations {
 
             Dependency simpleSchemeDependency = this.dependencyResolver.resolveArtifact(query);
 
-            dependenciesURL.add(new URL(formatJarUrl(simpleSchemeDependency.getArtifact(), File.separator)));
+            dependenciesURL.add(new URL(formatJarUrl(simpleSchemeDependency.getArtifact(), "/")));
 
             Set<Dependency> basicModelDependencies = this.dependencyResolver.resolveDependencies(query);
 
             for (Dependency dependency : basicModelDependencies) {
                 dependency = this.dependencyResolver.resolveArtifact(create(dependency, "jar"));
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
             }
 
             DependencyFacet dependencyFacet = selectedProject.getFacet(DependencyFacet.class);
@@ -240,7 +240,7 @@ public class PersistenceOperations {
 
             for (Dependency dependency : effectiveDependencies) {
                 dependency = this.dependencyResolver.resolveArtifact(create(dependency, "jar"));
-                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), File.separator)));
+                dependenciesURL.add(new URL(formatJarUrl(dependency.getArtifact(), "/")));
             }
 
             return new URLClassLoader(dependenciesURL.toArray(new URL[dependenciesURL.size()]));
