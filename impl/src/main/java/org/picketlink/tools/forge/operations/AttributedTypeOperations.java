@@ -39,7 +39,6 @@ import org.picketlink.idm.model.IdentityType;
 import org.picketlink.idm.model.annotation.AttributeProperty;
 
 import javax.inject.Inject;
-import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -94,7 +93,7 @@ public class AttributedTypeOperations {
         try (FileSystem fs = FileSystems.newFileSystem(Paths.get(projectArtifact.getFullyQualifiedName()), null)) {
             JavaSourceFacet javaFacet = selectedProject.getFacet(JavaSourceFacet.class);
             final MavenFacet mavenFacet = selectedProject.getFacet(MavenFacet.class);
-            final String basePackagePath = javaFacet.getBasePackage().replace('.', File.separatorChar);
+            final String basePackagePath = javaFacet.getBasePackage().replace('.', '/');
             final String packageRootPath = getPackageRootPath(mavenFacet);
 
             String fileSystemPath = packageRootPath + basePackagePath;
@@ -109,7 +108,7 @@ public class AttributedTypeOperations {
                     if (filePath.endsWith(suffix)) {
                         filePath = filePath.substring(0, filePath.indexOf(suffix));
 
-                        if (filePath.startsWith(File.separator)) {
+                        if (filePath.startsWith("/")) {
                             filePath = filePath.substring(1);
                         }
 
@@ -118,14 +117,14 @@ public class AttributedTypeOperations {
                         if (basePackageIndex != -1) {
                             filePath = filePath.substring(basePackageIndex);
 
-                            String typeName = filePath.replace(File.separatorChar, '.');
+                            String typeName = filePath.replace('/', '.');
 
-                            Class<?> type = null;
+                            Class<?> type;
 
                             try {
                                 type = classLoader.loadClass(typeName);
                             } catch (ClassNotFoundException e) {
-
+                                throw new RuntimeException("Could not load type [" + typeName + "].", e);
                             }
 
                             if (isAttributedType(type, classLoader)) {

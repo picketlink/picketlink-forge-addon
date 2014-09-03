@@ -41,7 +41,6 @@ import org.picketlink.tools.forge.PicketLinkBaseFacet;
 import org.picketlink.tools.forge.PicketLinkIDMFacet;
 
 import javax.inject.Inject;
-import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -141,13 +140,13 @@ public class PersistenceOperations {
                 .getCoordinate());
         Dependency dependency = this.dependencyResolver.resolveArtifact(query);
 
-        return findEntityTypes(dependency.getArtifact(), File.separator, "", classLoader);
+        return findEntityTypes(dependency.getArtifact(), "/", "", classLoader);
     }
 
     private Set<String> findEntityTypes(Resource<?> projectArtifact, final String packageRootPath, String packageName, final ClassLoader classLoader) {
         final Set<String> entityTypes = new HashSet<>();
 
-        final String packageRootPath2 = packageRootPath + packageName.replace('.', File.separatorChar);
+        final String packageRootPath2 = packageRootPath + packageName.replace('.', '/');
 
         try (FileSystem fs = FileSystems.newFileSystem(Paths.get(projectArtifact.getFullyQualifiedName()), null)) {
             Files.walkFileTree(fs.getPath(packageRootPath2), new SimpleFileVisitor<Path>() {
@@ -160,17 +159,17 @@ public class PersistenceOperations {
                     if (filePath.endsWith(suffix)) {
                         filePath = filePath.substring(0, filePath.indexOf(suffix));
 
-                        if (filePath.startsWith(File.separator)) {
+                        if (filePath.startsWith("/")) {
                             filePath = filePath.substring(1);
                         }
 
-                        if (!filePath.startsWith(File.separator)) {
-                            filePath = File.separator + filePath;
+                        if (!filePath.startsWith("/")) {
+                            filePath = "/" + filePath;
                         }
 
                         filePath = filePath.substring(packageRootPath.length());
 
-                        String typeName = filePath.replace(File.separatorChar, '.');
+                        String typeName = filePath.replace('/', '.');
 
                         Class<?> type;
 
