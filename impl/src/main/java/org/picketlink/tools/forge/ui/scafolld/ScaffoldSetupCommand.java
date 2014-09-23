@@ -90,7 +90,7 @@ public class ScaffoldSetupCommand extends AbstractProjectCommand implements UIWi
             Project selectedProject = getSelectedProject(context);
             Configuration configuration = selectedProject.getFacet(ConfigurationFacet.class).getConfiguration();
 
-            return configuration.getBoolean(ConfigurationOperations.Properties.PICKETLINK_SCAFFOLD_PROJECT.name(), false);
+            return configuration.getBoolean(ConfigurationOperations.Properties.PICKETLINK_SCAFFOLD_PROJECT.name(), true);
         }
 
         return false;
