@@ -19,10 +19,23 @@
         <h3>This form is an example about how to use a bean to perform authentication.</h3>
         <h:form id="loginForm">
             <h:messages globalOnly="true"/>
-
-            <h:inputText id="name" value="#{loginCredentials.userId}"/>
-            <h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/>
-            <h:commandButton id="login" value="Login" action="#{loginController.login}" styleClass="loginButton"/>
+            <table>
+                <tbody>
+                <tr>
+                    <td class="label"><label for="search:customerBeanExampleFirstName">User Name:</label></td>
+                    <td class="component"><h:inputText id="name" value="#{loginCredentials.userId}"/></td>
+                    <td class="required"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="search:customerBeanExampleFirstName">Password:</label></td>
+                    <td class="component"><h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/></td>
+                    <td class="required"></td>
+                </tr>
+                </tbody>
+            </table>
+            <span class="buttons">
+                <h:commandButton id="login" value="Login" action="#{loginController.login}" styleClass="loginButton"/>
+            </span>
         </h:form>
         <p>
             Tip: you can login with a username/password of picketlink/picketlink. Please, change it before publishing your application.

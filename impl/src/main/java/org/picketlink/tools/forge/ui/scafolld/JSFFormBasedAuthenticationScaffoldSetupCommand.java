@@ -41,7 +41,6 @@ import org.jboss.forge.addon.ui.result.navigation.NavigationResultBuilder;
 import org.jboss.forge.addon.ui.wizard.UIWizardStep;
 import org.picketlink.tools.forge.ConfigurationOperations;
 import org.picketlink.tools.forge.ui.SetupWizard;
-import org.picketlink.tools.forge.ui.http.HttpSecuritySetupWizard;
 import org.picketlink.tools.forge.ui.idm.IdentityManagementSetupWizard;
 
 import javax.inject.Inject;
@@ -65,6 +64,11 @@ public class JSFFormBasedAuthenticationScaffoldSetupCommand extends AbstractProj
 
     @Override
     public Result execute(UIExecutionContext context) throws Exception {
+        applyTemplate(context);
+        return Results.success("Templates successfully applied.");
+    }
+
+    private void applyTemplate(UIExecutionContext context) {
         Project selectedProject = getSelectedProject(context);
 
         createSecurityInitializerIfNecessary(selectedProject);
@@ -78,8 +82,6 @@ public class JSFFormBasedAuthenticationScaffoldSetupCommand extends AbstractProj
         Configuration configuration = selectedProject.getFacet(ConfigurationFacet.class).getConfiguration();
 
         configuration.setProperty(ConfigurationOperations.Properties.PICKETLINK_SCAFFOLD_PROJECT.name(), true);
-
-        return Results.success("Templates successfully applied.");
     }
 
     @Override
@@ -102,7 +104,6 @@ public class JSFFormBasedAuthenticationScaffoldSetupCommand extends AbstractProj
         builder.add(SetupWizard.class);
         builder.add(ServletSetupWizard.class);
         builder.add(IdentityManagementSetupWizard.class);
-        builder.add(HttpSecuritySetupWizard.class);
         builder.add(ScaffoldSetupWizard.class);
 
         return builder.build();
