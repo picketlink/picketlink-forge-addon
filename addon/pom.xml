@@ -8,20 +8,6 @@
     <version>1.0.0.Final</version>
   </parent>
   <artifactId>picketlink-forge-addon</artifactId>
-  <properties>
-    <version.picketlink>2.7.0.Beta1</version.picketlink>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-javaee-6.0</artifactId>
-        <version>${version.picketlink}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.jboss.forge.furnace.container</groupId>
